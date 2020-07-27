@@ -1,8 +1,8 @@
 {
-  "name": "cdk-test",
+  "name": "taxi-audit",
   "version": "0.1.0",
   "bin": {
-    "cdk-test": "bin/cdk-test.js"
+    "taxi-audit": "bin/infrastructure.js"
   },
   "scripts": {
     "build": "tsc",
@@ -21,6 +21,8 @@
     "typescript": "~3.7.2"
   },
   "dependencies": {
+    "@aws-cdk/aws-codebuild": "^1.54.0",
+    "@aws-cdk/aws-lambda": "^1.54.0",
     "@aws-cdk/core": "1.54.0",
     "source-map-support": "^0.5.16"
   }

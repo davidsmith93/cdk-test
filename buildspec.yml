@@ -1,0 +1,17 @@
+version: 0.2
+env:
+  exported-variables:
+  - TEMPLATE_FILE
+phases:
+  install:
+    commands:
+    - npm install -g aws-cdk
+    - npm install --quiet --no-progress
+  build:
+    commands:
+    - npm run build
+    - npm run cdk synth -- -o dist
+    - export TEMPLATE_FILE=`ls dist/*template*`
+artifacts:
+  base-directory: dist
+  files: '**/*'
