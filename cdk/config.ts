@@ -1,38 +1,19 @@
-export enum Environment {
-    DEV = "dev",
-    QA = "qa",
-    PROD = "prod"
-}
+import * as cdk from "@aws-cdk/core";
 
 export interface Config {
-    ENVIRONMENT: Environment,
-    LOG_LEVEL: string
+    environment: string,
+    log_level: string
 }
 
-const devConfig: Config = {
-    ENVIRONMENT: Environment.DEV,
-    LOG_LEVEL: "debug"
-};
+export function getConfig(stack: cdk.Stack): Config {
+    const environmentDetails = stack.node.tryGetContext("aws_env_details");
 
-const qaConfig: Config = {
-    ENVIRONMENT: Environment.QA,
-    LOG_LEVEL: "info"
-};
-
-const prodConfig: Config = {
-    ENVIRONMENT: Environment.PROD,
-    LOG_LEVEL: "warn"
-};
-
-export function getConfig(account: String, region: String): Config {
-
-    if(account === '140821111621' && region === 'us-west-2') {
-        return devConfig;
-    } else if (account === '140821111621' && region === 'eu-west-1') {
-        return qaConfig;
-    } else if(account === '124342901980' && region === 'eu-west-1') {
-        return prodConfig;
+    if(environmentDetails[stack.account] && environmentDetails[stack.account][stack.region]) {
+        return environmentDetails[stack.account][stack.region];
     }
 
-    throw Error(`Unable to find config for account: ${account} and region: ${region}`);
+    return {
+        environment: "dev",
+        log_level: "debug"
+    }
 }

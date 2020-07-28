@@ -1,0 +1,20 @@
+{
+  "aws_env_details": {
+    "140821111621": {
+      "us-west-2": {
+        "environment": "dev",
+        "log_level": "debug"
+      },
+      "eu-west-1": {
+        "environment": "qa",
+        "log_level": "debug"
+      }
+    },
+    "124342901980": {
+      "eu-west-1": {
+        "environment": "prod",
+        "log_level": "warn"
+      }
+    }
+  }
+}
